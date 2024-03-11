@@ -1,0 +1,23 @@
+body {
+    background-color: aquamarine;
+}
+
+nav {
+    width: 2rem;
+    height: 2rem;
+    background-color: black;
+}
+
+.cart {
+    align-items: right;
+}
+
+.icons {
+    align-content: right;
+}
+
+footer {
+    width: 2rem;
+    height: 2rem;
+    background-color: brown;
+}
