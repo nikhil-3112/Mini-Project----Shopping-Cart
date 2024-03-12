@@ -25,12 +25,13 @@ body {
 }
 
 .cart-item-actions {
-  margin-top: 91px;
+  margin-top: 25px;
 }
 
 .action-icons {
   height: 25px;
   width: 25px;
+  padding: 2px;
 }
 
 .action-icons:hover {
