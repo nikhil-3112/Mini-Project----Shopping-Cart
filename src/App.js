@@ -1,11 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App'; // Make sure this path is correct
+// import ReactDOM from 'react-dom';
+import CartItem from './cartItem'; 
 
 function App() {
   return (
     <div className="App">
-      <h1>Cart</h1>
+      <CartItem />
     </div>
   );
 }
