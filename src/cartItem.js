@@ -5,7 +5,7 @@ class CartItem extends React.Component {
         super()
         this.state = {
             price: 999,
-            title: "Phone",
+            title: "Mobile-Phone",
             Qty: 1,
             img: ''
         }
@@ -23,7 +23,11 @@ class CartItem extends React.Component {
     }
 
     decreaseQuantity= () => {
-        console.log(this.State);
+        const { Qty } = this.state;
+
+        if(Qty === 0) {
+            return;
+        }
 
         this.setState((prevState) => {
             return {
@@ -33,11 +37,12 @@ class CartItem extends React.Component {
     }
 
     render() {
-        const { title, price, Qty} = this.state;
+        console.log("this.props", this.props);
+        const { title, price, Qty} = this.props.product;
         return (
             <div className="cart-item">
                 <div className="left-block">
-                    <img style = {styles.image}  />
+                    <img style = {styles.image} />
                 </div>
                 <div className="right-block">
                     <div style = { { fontSize:25}}>Title: {title}</div>
@@ -58,8 +63,8 @@ class CartItem extends React.Component {
                         />
                         <img alt="delete" 
                         className="action-icons" 
+                        onClick={this.removeItem}
                         src="https://cdn.icon-icons.com/icons2/2249/PNG/512/delete_circle_outline_icon_139695.png" 
-
                         />
                     </div>
                 </div>
