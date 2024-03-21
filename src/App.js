@@ -3,38 +3,36 @@ import Cart from './Cart';
 import Navbar from './Navbar';
 
 class App extends React.Component {
-
-  constructor () {
-    super(); 
+  constructor() {
+    super();
     this.state = {
-        products: [
-            {
-                price: 99,
-                title: 'watch',
-                qty: 1,
-                img: '',
-                id: 1,
-            },
-            {
-                price: 999,
-                title: 'Mobile-phone',
-                qty: 10,
-                img: '',
-                id: 2,
-            },
-            {
-                price: 999,
-                title: 'Laptop',
-                qty: 4,
-                img: '',
-                id: 3,
-            },
-        ]
+      products: [
+        {
+          price: 99,
+          title: 'watch',
+          qty: 1,
+          img: 'https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=1294&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          id: 1,
+        },
+        {
+          price: 999,
+          title: 'Mobile-phone',
+          qty: 10,
+          img: 'https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?q=80&w=1229&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          id: 2,
+        },
+        {
+          price: 999,
+          title: 'Laptop',
+          qty: 4,
+          img: 'https://images.unsplash.com/photo-1575024357670-2b5164f470c3?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          id: 3,
+        },
+      ],
+    };
+  }
 
-    }
-
-}
-handleIncreaseQuantity = (product) => {
+  handleIncreaseQuantity = (product) => {
     console.log('Hey Please inc the qty of ', product);
     const { products } = this.state;
     const index = products.indexOf(product);
@@ -42,59 +40,72 @@ handleIncreaseQuantity = (product) => {
     products[index].qty += 1;
 
     this.setState({
-        products:products
-    })
-}
+      products: products,
+    });
+  };
 
-handleDecreaseQuantity = (product) => {
+  handleDecreaseQuantity = (product) => {
     console.log('Hey Please dec the qty of ', product);
     const { products } = this.state;
     const index = products.indexOf(product);
 
-    if(products[index].qty === 0)
-        return;
+    if (products[index].qty === 0) return;
 
     products[index].qty -= 1;
 
     this.setState({
-        products
-    })
-}
+      products,
+    });
+  };
 
-handleDeleteProduct = (id) => {
+  handleDeleteProduct = (id) => {
     const { products } = this.state;
 
     const items = products.filter((item) => item.id !== id);
 
     this.setState({
-        products:items,
-    })
-}
-getCartCount {
-  const { products } = this.state;
+      products: items,
+    });
+  };
 
-  let count = 0;
+  getCartCount() {
+    const { products } = this.state;
 
-  products.forEach((product) => {
-    count += product.qty;
-  })
+    let count = 0;
 
-  return count;
-}
+    products.forEach((product) => {
+      count += product.qty;
+    });
+
+    return count;
+  }
+
+  getCartTotal() {
+    const { products } = this.state;
+
+    let CartTotal = 0;
+
+    products.forEach((product) => {
+      CartTotal = CartTotal + product.qty * product.price;
+    });
+
+    return CartTotal;
+  }
 
   render() {
-    const products = this.state;
-  return (
-    <div className="App">
-      <Navbar count={this.getCartCount()} />
-      <Cart 
-        products = { products }
-        onIncreaseQuantity={this.handleIncreaseQuantity}
-        onDecreaseQuantity={this.handleDecreaseQuantity}
-        onDeleteProduct={this.handleDeleteProduct}
-      / >
-    </div>
-  );
+    const { products } = this.state;
+    return (
+      <div className="App">
+        <Navbar count={this.getCartCount()} />
+        <Cart
+          products={products}
+          onIncreaseQuantity={this.handleIncreaseQuantity}
+          onDecreaseQuantity={this.handleDecreaseQuantity}
+          onDeleteProduct={this.handleDeleteProduct}
+        />
+        <div style={{padding:10,fontSize:20}}>TOTAL: {this.getCartTotal()}</div>
+      </div>
+    );
   }
 }
 
