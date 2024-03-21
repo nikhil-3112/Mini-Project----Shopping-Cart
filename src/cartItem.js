@@ -1,59 +1,25 @@
 import React from 'react';
 
 class CartItem extends React.Component {
-    constructor () {
-        super()
-        this.state = {
-            price: 999,
-            title: "Mobile-Phone",
-            Qty: 1,
-            img: ''
-        }
-        // this.increaseQuantity = this.increaseQuantity.bind(this);
-    }
-
-    increaseQuantity= () => {
-        console.log('this',this.state);
-
-        this.setState((prevState) => {
-            return {
-                Qty: prevState.Qty + 1
-            }
-        })
-    }
-
-    decreaseQuantity= () => {
-        const { Qty } = this.state;
-
-        if(Qty === 0) {
-            return;
-        }
-
-        this.setState((prevState) => {
-            return {
-                Qty: prevState.Qty - 1
-            }
-        })
-    }
-
     render() {
         console.log("this.props", this.props);
-        const { title, price, Qty} = this.props.product;
+        const { title, price, qty} = this.props.product;
         return (
             <div className="cart-item">
                 <div className="left-block">
-                    <img style = {styles.image} />
+                    <img style = {styles.image} alt=""/>
                 </div>
                 <div className="right-block">
                     <div style = { { fontSize:25}}>Title: {title}</div>
                     <div style = { { color:'#777'}}>Price: {price}</div>
-                    <div style = { { color:'#777'}}>Qty: {Qty}</div>
-                    <div class="cart-item-actions">
+                    <div style = { { color:'#777'}}>Qty: {qty}</div>
+                    <div className="cart-item-actions">
                         <img 
                         alt="increase" 
                         className="action-icons" 
-                        onClick={this.increaseQuantity}
+                        // onClick={this.increaseQuantity}
                         src="https://cdn-icons-png.flaticon.com/512/262/262038.png" 
+                        onClick={() => this.props.onIncreaseQuantity}
                         />
                         <img 
                         alt="decrease" 
